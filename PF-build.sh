@@ -1,6 +1,6 @@
-#!/bin/bash 
+#!/bin/bash
 # This bash script is used to compile automatically the Prusa firmware with a dedicated build environment and settings
-# 
+#
 # Supported OS: Windows 10, Linux64 bit
 # Beta OS: Linux32 bit
 #
@@ -35,12 +35,12 @@
 # Useful things to edit and compare your custom Firmware
 # 1. Download and install current and correct (64bit or 32bit) Notepad++ version https://notepad-plus-plus.org/download
 # 2. Another great tool to compare your custom mod and stock firmware is WinMerge http://winmerge.org/downloads/?lang=en
-# 
-# Example for MK3: open git bash and change to your Firmware directory 
+#
+# Example for MK3: open git bash and change to your Firmware directory
 # <username>@<machine name> MINGW64 /<drive>/path
 # bash build.sh 1_75mm_MK3-EINSy10a-E3Dv6full
 #
-# Example for MK25: open git bash and change to your directory 
+# Example for MK25: open git bash and change to your directory
 # gussner@WIN01 MINGW64 /d/Data/Prusa-Firmware/MK3
 # bash build.sh 1_75mm_MK25-RAMBo13a-E3Dv6full
 #
@@ -63,7 +63,7 @@
 # 17 Jan 2019, 3d-gussner, Build_3, Check for OS Windows or Linux and use the right build environment
 # 10 Feb 2019, ropaha, Pull Request, Select variant from list while using build.sh
 # 10 Feb 2019, ropaha, change FW_DEV_VERSION automatically depending on FW_VERSION RC/BETA/ALPHA
-# 10 Feb 2019, 3d-gussner, 1st tests with English only 
+# 10 Feb 2019, 3d-gussner, 1st tests with English only
 # 10 Feb 2019, ropaha, added compiling of all variants and English only
 # 10 Feb 2019, 3d-gussner, Set OUTPUT_FOLDER for hex files
 # 11 Feb 2019, 3d-gussner/ropaha, Minor changes and fixes
@@ -100,7 +100,7 @@
 # 14 Jul 2019, 3d-gussner, Update preferences and make it really portable
 # 15 Jul 2019, 3d-gussner, New PF-build-env GitHub branch
 # 16 Jul 2019, 3d-gussner, New Arduino_boards GitHub fork
-# 17 Jul 2019, 3d-gussner, Final tests under Windows 10 and Linux Subsystem for Windows   
+# 17 Jul 2019, 3d-gussner, Final tests under Windows 10 and Linux Subsystem for Windows
 # 18 Jul 2019, 3d-gussner, Added python check
 # 18 Jul 2019, deliopoulos, No need more for changing 'platform.txt' file as it comes with the Arduino Boards.
 # 18 Jul 2019, deliopoulos, Modified 'PF_BUILD_FILE_URL' to use 'BUILD_ENV' variable
@@ -126,7 +126,7 @@
 #						   Still in progress.
 #                           - No branding
 #							- Change for stock Prusa R4/R5 Extruder
-# 17 Feb 2020, 3d-gussner, Add aarch64 beat support to compile on Odroid-C1/2 RPi4+ 
+# 17 Feb 2020, 3d-gussner, Add aarch64 beat support to compile on Odroid-C1/2 RPi4+
 # 21 Apr 2020, 3d-gussner, Update the FW_COMMIT number to current commit number
 #                          Add git hash to support LCD menu
 # 28 Apr 2020, 3d-gussner, Added RC3 detection
@@ -157,13 +157,13 @@
 # 13 Feb 2021, 3d-gussner, MK404 improvements like "flash" MK3, MK3S languages files to MK404 xflash.
 # 27 Feb 2021, 3d-gussner, Add './lang-community.sh' and update exits
 # 20 Mar 2021, wschadow,   fixed paths arguments when sort.sh is called
-# 18 Jul 2021, wschadow,   variants in selection are sorted 
+# 18 Jul 2021, wschadow,   variants in selection are sorted
 #
 # 03 May 2021, 3d-gussner, Update exit numbers
 #                          01-14 prepare build env
 #                          21-32 prepare compiling
 #                          41-47 compiling
-#                          51-54 cleanup 
+#                          51-54 cleanup
 #                          61-62 MK404
 # 03 May 2021, 3d-gussner, Update documentation and change version to v1.2.0
 # 03 May 2021, 3d-gussner, Add SIM atmega404
@@ -174,7 +174,7 @@
 # 18 Jun 2021, 3d-gussner, Use atmega404 if extanded RAM or FLASH size are chosen
 # 18 Jun 2021, 3d-gussner, Remove MK404 copy of lang file as it has been fixed in MK404
 # 21 Jun 2021, 3d-gussner, Change atmega404 board flash argument to y
-#                          Use newer version of MK404-build.sh instead start the program 
+#                          Use newer version of MK404-build.sh instead start the program
 # 22 Jun 2021, 3d-gussner, Added _RAM-<value> and _FLASH-<value> as OUTPUT_FILE_SUFFIX if someone builds an atmega404 firmware
 #                          Added some logic if IDE 1.8.13 is used
 #                          Added some logic if Arduino_boards 1.0.4 is used
@@ -192,7 +192,7 @@
 #                          Add selection of language in MK404 for MK2.5/S
 # 10 Feb 2022, 3d-gussner, Add SRCDIR for compatibility with build server
 # 13 Feb 2022, leptun    , Fix -o for "Restoring" messages after failure
-# 11 Apr 2022, wschadow  , moved sorting out of loop, added a counter  
+# 11 Apr 2022, wschadow  , moved sorting out of loop, added a counter
 
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
@@ -312,7 +312,7 @@ if [ ! -z "$verbose_IDE_flag" ]; then
     fi
 else
     verbose_IDE="0"
-fi  
+fi
 
 #Check if Build is selected with argument '-f'
 if [ ! -z "$board_flash_flag" ] ; then
@@ -382,13 +382,13 @@ else
 fi
 #End: Check if Arduino IDE version is correct
 
-#Start: Check if Output is selecetd via argument '-o' 
+#Start: Check if Output is selecetd via argument '-o'
 if [[ -z "$output_flag" || "$output_flag" == 1 ]] ; then
     OUTPUT=1
 else
     OUTPUT=0
 fi
-#End: Check if Output is selecetd via argument '-o' 
+#End: Check if Output is selecetd via argument '-o'
 ##}
 #### End: Check for options/flags
 
@@ -413,7 +413,7 @@ fi
 #### Start: Check Check if script has been canceled or failed nr1.
 check_script_failed_nr1()
 {
-#Check for "Configuration.tmp" 
+#Check for "Configuration.tmp"
 if [ -f "$SCRIPT_PATH/Firmware/Configuration.tmp" ]; then
     cp -f $SCRIPT_PATH/Firmware/Configuration.tmp $SCRIPT_PATH/Firmware/Configuration.h
     #echo "Found Configuration.tmp restore Configuration.h"
@@ -425,7 +425,7 @@ fi
 #### Start: Check if script has been canceled or failed nr2.
 check_script_failed_nr2()
 {
-#Check for "config.tmp" 
+#Check for "config.tmp"
     #echo "No config.tmp"
 if [ -f "$SCRIPT_PATH/Firmware/config.tmp" ]; then
     cp -f $SCRIPT_PATH/Firmware/config.tmp $SCRIPT_PATH/Firmware/config.h
@@ -558,7 +558,7 @@ fi
 }
 #End: Check gawk ... needed during language build
 
-#### Start: Set build environment 
+#### Start: Set build environment
 set_build_env_variables()
 {
 BUILD_ENV="1.0.6"
@@ -764,12 +764,12 @@ if [[ ! -d "../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$P
     if [ ! -d ../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/$BOARD_PACKAGE_NAME/hardware/avr ]; then
         mkdir ../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/$BOARD_PACKAGE_NAME/hardware/avr
     fi
-    
+
     mv ../PF-build-env-$BUILD_ENV/$BOARD_FILENAME-$BOARD_VERSION ../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/$BOARD_PACKAGE_NAME/hardware/avr/$BOARD_VERSION
     echo "# $BOARD_FILENAME-$BOARD_VERSION" >> ../PF-build-env-$BUILD_ENV/$BOARD_FILENAME-$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor.txt
 
     echo "$(tput sgr 0)"
-fi    
+fi
 
 # Download and extract Prusa Firmware specific library files
 if [[ "$BOARD_VERSION" == "1.0.3" || "$BOARD_VERSION" == "1.0.2" || "$BOARD_VERSION" == "1.0.1" || "$BOARD_VERSION" == "1.0.0"  ]]; then
@@ -803,7 +803,7 @@ if [ -d "../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Proc
     if [ $OUTPUT == "1" ] ; then
         sleep 2
     fi
-fi    
+fi
 if [ -d "../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2" ]; then
     echo "$(tput setaf 6)PrusaReasearch compatible tools have been manually updated...$(tput setaf 2)"
     if [ $OUTPUT == "1" ] ; then
@@ -816,7 +816,7 @@ if [ -d "../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Proc
     cp -f ../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/hardware/tools/avr/avr/lib/ldscripts/avr6.xn ../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/arduino/tools/avr-gcc/4.9.2-atmel3.5.4-arduino2/avr/lib/ldscripts/avr6.xn
     echo "# PF-build-env-portable-$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor-$BUILD_ENV" >> ../PF-build-env-$BUILD_ENV/PF-build-env-portable-$BUILD_ENV-$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor.txt
     echo "$(tput sgr0)"
-fi    
+fi
 if [ -d "../PF-build-env-$BUILD_ENV/$ARDUINO_ENV-$BOARD_VERSION-$TARGET_OS-$Processor/portable/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2" ]; then
     echo "$(tput setaf 1)Arduino IDE tools have been updated manually to a non supported version!!!"
     echo "Delete ../PF-build-env-$BUILD_ENV and start the script again"
@@ -849,7 +849,7 @@ if type git > /dev/null; then
 fi
 
 #
-# '-v' argument defines which variant of the Prusa Firmware will be compiled 
+# '-v' argument defines which variant of the Prusa Firmware will be compiled
 
 if [ -z "$variant_flag" ] ; then
     # Select which variant of the Prusa Firmware will be compiled, like
@@ -882,7 +882,7 @@ if [ -z "$variant_flag" ] ; then
         esac
     done
 else
-    if [ -f "$SCRIPT_PATH/Firmware/variants/$variant_flag" ] ; then 
+    if [ -f "$SCRIPT_PATH/Firmware/variants/$variant_flag" ] ; then
         VARIANTS=$variant_flag
     elif [ "$variant_flag" == "All" ] ; then
         while IFS= read -r -d $'\0' f; do
@@ -914,7 +914,7 @@ if [ -z "$language_flag" ] ; then
                 LANGUAGES="ALL"
                 break
                 ;;
-            "English only") 
+            "English only")
                 LANGUAGES="EN_ONLY"
                 break
                 ;;
@@ -1025,7 +1025,7 @@ prepare_code_for_compiling()
     FW_REVISION=$(grep --max-count=1 "\bFW_REVISION\b" $SCRIPT_PATH/Firmware/Configuration.h| sed -e's/  */ /g'|cut -d ' ' -f3)
     FW="$FW_MAJOR$FW_MINOR$FW_REVISION"
     #FW=$(grep --max-count=1 "\bFW_VERSION\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d '"' -f2|sed 's/\.//g')
-    if [ -z "$BUILD" ] ; then    
+    if [ -z "$BUILD" ] ; then
         # Find build version in Configuration.h file and use it to generate the hex filename
         BUILD=$(grep --max-count=1 "\bFW_COMMIT_NR\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d ' ' -f3)
     else
@@ -1105,7 +1105,7 @@ prepare_hex_folders()
         OUTPUT_FOLDER="PF-build-hex/FW$FW-Build$BUILD/$BOARD"
         OUTPUT_PATH=PF-build-hex/FW$FW-Build$BUILD
     fi
-    
+
     #Define OUTPUT_FILENAME
     OUTPUT_FILENAME=FW$FW-$VARIANT-Build$BUILD
     #Check for OUTPUT_FILENAME_SUFFIX and add it
@@ -1204,7 +1204,7 @@ prepare_variant_for_compiling()
     #Check if compiler flags are set to Prusa specific needs for the rambo board.
     #if [ $TARGET_OS == "windows" ]; then
        #RAMBO_PLATFORM_FILE="PrusaResearchRambo/avr/platform.txt"
-    #fi    
+    #fi
 
     #New fresh PF-Firmware-build
     if [ "$new_build_flag" == "1" ]; then
@@ -1286,19 +1286,19 @@ compile_en_firmware()
     #Check if compiler flags are set to Prusa specific needs for the rambo board.
 #    if [ $TARGET_OS == "windows" ]; then
 #        RAMBO_PLATFORM_FILE="PrusaResearchRambo/avr/platform.txt"
-#    fi    
-    
+#    fi
+
     #### End of Prepare building
-        
+
     #### Start building
-        
+
     export ARDUINO=$BUILD_ENV_PATH
     #echo $BUILD_ENV_PATH
     #export BUILDER=$ARDUINO/arduino-builder
 
     echo
     #read -t 5 -p "Press Enter..."
-    echo 
+    echo
 
     echo "Start to build Prusa Firmware ..."
     echo "Using variant $VARIANT$(tput setaf 3)"
@@ -1352,7 +1352,7 @@ create_multi_firmware()
         # build languages
         echo "$(tput setaf 3)"
         ./lang-build.sh || failures 25
-        # Combine compiled firmware with languages 
+        # Combine compiled firmware with languages
         ./fw-build.sh || failures 25
         cp not_tran.txt not_tran_$VARIANT.txt
         cp not_used.txt not_used_$VARIANT.txt
@@ -1369,13 +1369,13 @@ create_multi_firmware()
         else
             #Search for created firmware languages
             langs=$(find firmware_*.hex | cut -d "_" -f2 | cut -d "." -f1)
-            #Copy found firmware_*.hex files 
+            #Copy found firmware_*.hex files
                 for la in $langs; do
                     cp -f firmware_$la.hex $SCRIPT_PATH/../$OUTPUT_FOLDER/$OUTPUT_FILENAME-$la.hex
                 done
             cp -f $BUILD_PATH/Firmware.ino.elf $SCRIPT_PATH/../$OUTPUT_FOLDER/$OUTPUT_FILENAME.elf
             echo "$(tput setaf 2)Zip multi language firmware for MK2.5/miniRAMbo board to PF-build-hex folder$(tput sgr 0)"
-            if [ $TARGET_OS == "windows" ]; then 
+            if [ $TARGET_OS == "windows" ]; then
                 zip a $SCRIPT_PATH/../$OUTPUT_FOLDER/$OUTPUT_FILENAME.zip $SCRIPT_PATH/../$OUTPUT_FOLDER/$OUTPUT_FILENAME-??.hex
                 #rm $SCRIPT_PATH/../$OUTPUT_FOLDER/$OUTPUT_FILENAME-??.hex
             elif [ $TARGET_OS == "linux" ]; then
@@ -1413,7 +1413,7 @@ save_en_firmware()
 #### Start: Cleanup Firmware
 cleanup_firmware()
 {
-  
+
     if [[ -z "$prusa_flag" || "$prusa_flag" == "0" ]]; then
         rm $SCRIPT_PATH/Firmware/Configuration_prusa.h || failures 13
     fi
@@ -1440,7 +1440,7 @@ cleanup_firmware()
     if [ "$new_build_flag" == "1" ]; then
         rm -r -f $BUILD_PATH/* || failures 13
     fi
- 
+
     # Restore files to previous state
     sed -i -- "s/^#define FW_DEV_VERSION FW_VERSION_$DEV_STATUS/#define FW_DEV_VERSION FW_VERSION_UNKNOWN/g" $SCRIPT_PATH/Firmware/Configuration.h
     sed -i -- 's/^#define FW_REPOSITORY "Prusa3d"/#define FW_REPOSITORY "Unknown"/g' $SCRIPT_PATH/Firmware/Configuration.h
@@ -1653,7 +1653,7 @@ change_ArduinoIDEpreferances
 download_prepare_Prusa_build_files
 check_ArduinoIDE_User_interaction
 
-#### Start 
+#### Start
 set_paths
 check_branch_changed
 
@@ -1671,7 +1671,7 @@ do
     check_script_failed_nr1
     check_script_failed_nr2
     make_backup1
-    make_backup2    
+    make_backup2
     prepare_code_for_compiling
     prepare_hex_folders
     list_usefull_data
