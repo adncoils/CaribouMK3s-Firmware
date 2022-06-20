@@ -9,9 +9,9 @@
 #
 # Example: ./sort.sh ../PF-build-hex/FW381-Build2869 ../PF-build-hex/Firmware-381-Build2869
 #          The script will search the files in ./FW381-Build2869 and copy them to the destination ../Firmware-381-Build2869
-# 
+#
 # V1.2
-# 
+#
 # Change log
 # 17 Dec 2019, 3d-gussner, Initial version
 # 18 Dec 2019, 3d-gussner, add arguments $1 = Start path and $2 Destination path
@@ -275,15 +275,15 @@ find $Destination_Path -type d -empty -delete
 echo
 echo 'creating zip file of sorted hex-files ....'
 echo
+ZIPNAMETMP=${Destination_Path%*/}
+ZIPNAME=${ZIPNAMETMP##*/}
+echo $ZIPNAME
 if [ $TARGET_OS == "windows" ]; then
     zip a $Destination_Path/$ZIPNAME.zip  $Destination_Path/* | tail -4
 else
- 	ZIPNAMETMP=${Destination_Path%*/}
-	ZIPNAME=${ZIPNAMETMP##*/}	
 	pushd $Destination_Path
 	zip -r $Destination_Path/$ZIPNAME.zip  * | tail -4
 	popd
 fi
 echo
 echo '   ... done'
- 
