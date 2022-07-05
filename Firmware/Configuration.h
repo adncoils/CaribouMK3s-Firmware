@@ -27,7 +27,7 @@ extern PGM_P sPrinterName;
     #define FW_VERSION STR(FW_MAJOR) "." STR(FW_MINOR) "." STR(FW_REVISION) "-" STR(FW_FLAVOR) "" STR(FW_FLAVERSION)
 #endif
 
-#define FW_COMMIT_NR 5827
+#define FW_COMMIT_NR 5828
 #define FW_COMMIT_HASH "5d8456ee"
 
 // FW_VERSION_UNKNOWN means this is an unofficial build.
@@ -98,12 +98,6 @@ extern PGM_P sPrinterName;
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 
-
-
-
-
-
-
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
 // #define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
@@ -117,20 +111,13 @@ extern PGM_P sPrinterName;
 
 #define POWER_SUPPLY 1
 
-
-
-
-
 // Define this to have the electronics keep the power supply off on startup. If you don't know what this is leave it.
 // #define PS_DEFAULT_OFF
-
 
 // Actual temperature must be close to target for this long before M109 returns success
 #define TEMP_RESIDENCY_TIME 3  // (seconds)
 #define TEMP_HYSTERESIS 5       // (degC) range of +/- temperatures considered "close" to the target one
 #define TEMP_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
-
-
 
 // If your bed has low resistance e.g. .6 ohm and throws the fuse you can duty cycle it to reduce the
 // average current. The value should be an integer and the heat bed will be turned on for 1 interval of
@@ -157,7 +144,6 @@ extern PGM_P sPrinterName;
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 // Ultimaker
 
-
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
 //    #define  DEFAULT_Ki 0.1
@@ -168,7 +154,6 @@ extern PGM_P sPrinterName;
 //    #define  DEFAULT_Ki 2.25
 //    #define  DEFAULT_Kd 440
 #endif // PIDTEMP
-
 
 //this prevents dangerous Extruder moves, i.e. if the temperature is under the limit
 //can be software-disabled for whatever purposes by
@@ -450,7 +435,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
   #define Z_PROBE_OFFSET_RANGE_MAX -5
 #endif
 
-
 // EEPROM
 // The microcontroller can store settings in the EEPROM, e.g. max velocity...
 // M500 - stores parameters in EEPROM
@@ -570,6 +554,5 @@ enum CalibrationStatus
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"
-
 
 #endif //__CONFIGURATION_H
