@@ -158,7 +158,6 @@
 # 27 Feb 2021, 3d-gussner, Add './lang-community.sh' and update exits
 # 20 Mar 2021, wschadow,   fixed paths arguments when sort.sh is called
 # 18 Jul 2021, wschadow,   variants in selection are sorted
-#
 # 03 May 2021, 3d-gussner, Update exit numbers
 #                          01-14 prepare build env
 #                          21-32 prepare compiling
@@ -193,7 +192,7 @@
 # 10 Feb 2022, 3d-gussner, Add SRCDIR for compatibility with build server
 # 13 Feb 2022, leptun    , Fix -o for "Restoring" messages after failure
 # 11 Apr 2022, wschadow  , moved sorting out of loop, added a counter
-
+# 05 Jul 2022, wschadow  , added restoration of HASH in Firmware/Configuration.h
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 export SRCDIR=$SCRIPT_PATH
