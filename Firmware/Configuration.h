@@ -27,7 +27,7 @@ extern PGM_P sPrinterName;
     #define FW_VERSION STR(FW_MAJOR) "." STR(FW_MINOR) "." STR(FW_REVISION) "-" STR(FW_FLAVOR) "" STR(FW_FLAVERSION)
 #endif
 
-#define FW_COMMIT_NR 5831
+#define FW_COMMIT_NR 5832
 #define FW_COMMIT_HASH "5d8456ee"
 
 // FW_VERSION_UNKNOWN means this is an unofficial build.
@@ -50,7 +50,7 @@ extern PGM_P sPrinterName;
 #define FW_VERSION_ALPHA    4
 // This is a beta release. Only the build server should set this build type.
 #define FW_VERSION_BETA     3
-// This is a release candidate build. Only the build server should set this build type.
+// This is a release candidate build. git statusOnly the build server should set this build type.
 #define FW_VERSION_RC       2
 // This is a final release. Only the build server should set this build type.
 #define FW_VERSION_GOLD     1
@@ -205,7 +205,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
 //#define THERMAL_RUNAWAY_PROTECTION_BED_HYSTERESIS 2 // in degree Celsius
 //===========================================================================
 
-
 //===========================================================================
 //=============================Mechanical Settings===========================
 //===========================================================================
@@ -260,7 +259,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
 #define DISABLE_Z 0
 #define DISABLE_E 0// For all extruders
 #define DISABLE_INACTIVE_EXTRUDER 1 //disable only inactive extruders and keep active extruder enabled
-
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
@@ -335,7 +333,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
 
   #endif // AUTO_BED_LEVELING_GRID
 
-
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
   // X and Y offsets must be integers
   #define X_PROBE_OFFSET_FROM_EXTRUDER -25
@@ -358,7 +355,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
   // You MUST HAVE the SERVO_ENDSTOPS defined to use here a value higher than zero otherwise your code will not compile.
 
 //  #define PROBE_SERVO_DEACTIVATION_DELAY 300
-
 
 //If you have enabled the Bed Auto Leveling and are using the same Z Probe for Z Homing,
 //it is highly recommended you let this Z_SAFE_HOMING enabled!
@@ -397,11 +393,9 @@ your extruder heater takes 2 minutes to hit the target on heating.
 	  #endif
 	#endif
 
-
   #endif
 
 #endif // ENABLE_AUTO_BED_LEVELING
-
 
 // The position of the homing switches
 //#define MANUAL_HOME_POSITIONS  // If defined, MANUAL_*_HOME_POS below will be used
@@ -409,7 +403,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
 
 //Manual homing switch locations:
 // For deltabots this means top and center of the Cartesian print volume.
-
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
@@ -469,7 +462,6 @@ your extruder heater takes 2 minutes to hit the target on heating.
 #define SDSUPPORT
 #define LCD_WIDTH 20
 #define LCD_HEIGHT 4
-
 
 // Increase the FAN pwm frequency. Removes the PWM noise but increases heating in the FET/Arduino
 //#define FAST_PWM_FAN
