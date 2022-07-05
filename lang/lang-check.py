@@ -79,7 +79,8 @@ def print_truncated(text, cols):
     print('   |' + prefix + '|' + suffix)
 
 def print_ruler(spc, cols):
-    print(' ' * spc + cyan(('₀₁₂₃₄₅₆₇₈₉'*4)[:cols]))
+    print(' ' * spc + cyan(('----------'*4)[:cols]))
+#    print(' ' * spc + cyan(('₀₁₂₃₄₅₆₇₈₉'*4)[:cols]))
 
 def print_source_translation(source, translation, wrapped_source, wrapped_translation, rows, cols):
     if rows == 1:
@@ -183,7 +184,7 @@ def parse_txt(lang, no_warning, warn_empty, information, import_check):
                 print(red(source))
                 exit(1)
             if (source[-1]=="\""):
-                source = source.strip('"') #remove " double quotes from message 
+                source = source.strip('"') #remove " double quotes from message
             else:
                 print(red('[E]: Critical syntax error: Missing " double quotes at end of message in source on line %d' % lines))
                 print(red(source))
@@ -224,7 +225,7 @@ def parse_txt(lang, no_warning, warn_empty, information, import_check):
             source = unescape(source)
             if lang != "en":
                 translation = unescape(translation)
-            
+
             #print (translation) #Debug
             wrapped_source = wrap_text(source, cols)
             rows_count_source = len(wrapped_source)
