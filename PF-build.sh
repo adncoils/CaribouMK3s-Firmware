@@ -1024,7 +1024,7 @@ prepare_code_for_compiling()
     FW_REVISION=$(grep --max-count=1 "\bFW_REVISION\b" $SCRIPT_PATH/Firmware/Configuration.h| sed -e's/  */ /g'|cut -d ' ' -f3)
     FW="$FW_MAJOR$FW_MINOR$FW_REVISION"
     #FW=$(grep --max-count=1 "\bFW_VERSION\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d '"' -f2|sed 's/\.//g')
-    BUILDHASH=$(grep --max-count=1 "\bFW_COMMIT_HASH\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d ' ' -f3)
+    BUILD_HASH=$(grep --max-count=1 "\bFW_COMMIT_HASH\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d ' ' -f3)
     if [ -z "$BUILD" ] ; then
         # Find build version in Configuration.h file and use it to generate the hex filename
         BUILD=$(grep --max-count=1 "\bFW_COMMIT_NR\b" $SCRIPT_PATH/Firmware/Configuration.h | sed -e's/  */ /g'|cut -d ' ' -f3)
@@ -1444,10 +1444,9 @@ cleanup_firmware()
     # Restore files to previous state
     sed -i -- "s/^#define FW_DEV_VERSION FW_VERSION_$DEV_STATUS/#define FW_DEV_VERSION FW_VERSION_UNKNOWN/g" $SCRIPT_PATH/Firmware/Configuration.h
     sed -i -- 's/^#define FW_REPOSITORY "Prusa3d"/#define FW_REPOSITORY "Unknown"/g' $SCRIPT_PATH/Firmware/Configuration.h
-    sed -i -- "s/^#define FW_COMMIT_HASH.*/#define FW_COMMIT_HASH $BUILDHASH/g" $SCRIPT_PATH/Firmware/Configuration.h
+    sed -i -- "s/^#define FW_COMMIT_HASH.*/#define FW_COMMIT_HASH $BUILD_HASH/g" $SCRIPT_PATH/Firmware/Configuration.h
     if [ ! -z "$BUILD_ORG" ] ; then
         sed -i -- "s/^#define FW_COMMIT_NR.*/#define FW_COMMIT_NR $BUILD_ORG/g" $SCRIPT_PATH/Firmware/Configuration.h
-		sed -i -- "s/.*#define FW_COMMIT_HASH.*/#define FW_COMMIT_HASH \"\"/g" $SCRIPT_PATH/Firmware/Configuration.h
     fi
     echo $MULTI_LANGUAGE_CHECK
     #sed -i -- "s/^#define LANG_MODE * /#define LANG_MODE              $MULTI_LANGUAGE_CHECK/g" $SCRIPT_PATH/Firmware/config.h
